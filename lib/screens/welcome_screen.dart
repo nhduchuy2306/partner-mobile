@@ -3,32 +3,20 @@ import 'package:grocery_app/common_widgets/app_button.dart';
 import 'package:grocery_app/common_widgets/app_text.dart';
 import 'package:grocery_app/screens/dashboard/dashboard_screen.dart';
 import 'package:grocery_app/styles/colors.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:page_transition/page_transition.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  final String imagePath = "assets/images/welcome_image.png";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 30),
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(imagePath),
-            fit: BoxFit.cover,
-          ),
-        ),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Spacer(),
               icon(),
-              SizedBox(
-                height: 20,
-              ),
               welcomeTextWidget(),
               SizedBox(
                 height: 10,
@@ -49,11 +37,12 @@ class WelcomeScreen extends StatelessWidget {
   }
 
   Widget icon() {
-    String iconPath = "assets/icons/app_icon.svg";
-    return SvgPicture.asset(
+    String iconPath = "assets/images/appLogo.png";
+    return Image.asset(
       iconPath,
-      width: 48,
-      height: 56,
+      width: 300,
+      height: 300,
+      color: Colors.white,
     );
   }
 
@@ -62,13 +51,13 @@ class WelcomeScreen extends StatelessWidget {
       children: [
         AppText(
           text: "Welcome",
-          fontSize: 48,
+          fontSize: 30,
           fontWeight: FontWeight.w600,
           color: Colors.white,
         ),
         AppText(
           text: "to our store",
-          fontSize: 48,
+          fontSize: 30,
           fontWeight: FontWeight.w600,
           color: Colors.white,
         ),
@@ -78,7 +67,8 @@ class WelcomeScreen extends StatelessWidget {
 
   Widget sloganText() {
     return AppText(
-      text: "Get your grecories as fast as in hour",
+      text: "Get your favorite gear to improve your productivity",
+      textAlign: TextAlign.center,
       fontSize: 16,
       fontWeight: FontWeight.w600,
       color: Color(0xffFCFCFC).withOpacity(0.7),
@@ -86,21 +76,33 @@ class WelcomeScreen extends StatelessWidget {
   }
 
   Widget getButton(BuildContext context) {
-    return AppButton(
-      label: "Get Started",
-      fontWeight: FontWeight.w600,
-      padding: EdgeInsets.symmetric(vertical: 25),
-      onPressed: () {
-        onGetStartedClicked(context);
-      },
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: Colors.white,
+          width: 2,
+        ),
+      ),
+      child: AppButton(
+        label: "Get Started",
+        fontWeight: FontWeight.w600,
+        padding: EdgeInsets.symmetric(vertical: 25),
+        onPressed: () {
+          onGetStartedClicked(context);
+        },
+      ),
     );
   }
 
   void onGetStartedClicked(BuildContext context) {
-    Navigator.of(context).pushReplacement(new MaterialPageRoute(
-      builder: (BuildContext context) {
-        return DashboardScreen();
-      },
-    ));
+    Navigator.push(
+      context,
+      PageTransition(
+        child: DashboardScreen(),
+        type: PageTransitionType.fade,
+        duration: Duration(milliseconds: 1000),
+      ),
+    );
   }
 }

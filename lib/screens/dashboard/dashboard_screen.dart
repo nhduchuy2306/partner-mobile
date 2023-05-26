@@ -24,10 +24,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           boxShadow: [
             BoxShadow(
-                color: Colors.black38.withOpacity(0.1),
-                spreadRadius: 0,
-                blurRadius: 37,
-                offset: Offset(0, -12)),
+              color: Colors.black38.withOpacity(0.1),
+              spreadRadius: 0,
+              blurRadius: 37,
+              offset: Offset(0, -12),
+            ),
           ],
         ),
         child: ClipRRect(

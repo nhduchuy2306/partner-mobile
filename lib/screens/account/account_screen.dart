@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:grocery_app/common_widgets/app_text.dart';
+import 'package:grocery_app/common_widgets/customize_button.dart';
 import 'package:grocery_app/helpers/column_with_seprator.dart';
+import 'package:grocery_app/screens/login_screen.dart';
 import 'package:grocery_app/styles/colors.dart';
+import 'package:page_transition/page_transition.dart';
 
 import 'account_item.dart';
 
@@ -19,37 +22,85 @@ class AccountScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              ListTile(
-                leading:
-                    SizedBox(width: 65, height: 65, child: getImageHeader()),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 25),
+                height: 65,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    AppText(
-                      text: "Vong Quoc Phi",
-                      fontSize: 18,
+                    ButtonWidget(
+                      text: "Login",
+                      roundness: 10,
+                      thickness: 1,
                       fontWeight: FontWeight.bold,
+                      padding: EdgeInsets.all(10),
+                      fontSize: 18,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          PageTransition(
+                            child: LoginScreen(),
+                            type: PageTransitionType.bottomToTop,
+                            duration: Duration(milliseconds: 200),
+                          ),
+                        );
+                      },
+                      textColor: AppColors.primaryColor,
                     ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Icon(
-                        CupertinoIcons.pen,
-                        color: Color(0xff53B175),
-                        size: 20,
-                      ),
+                    ButtonWidget(
+                      text: "Register",
+                      roundness: 10,
+                      thickness: 1,
+                      fontWeight: FontWeight.bold,
+                      padding: EdgeInsets.all(10),
+                      fontSize: 18,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          PageTransition(
+                            child: LoginScreen(),
+                            type: PageTransitionType.bottomToTop,
+                            duration: Duration(milliseconds: 200),
+                          ),
+                        );
+                      },
+                      textColor: AppColors.darkGrey,
+                      borderColor: AppColors.darkGrey,
                     ),
                   ],
                 ),
-                subtitle: AppText(
-                  text: "phivq2002@gmail.com",
-                  color: Color(0xff7C7C7C),
-                  fontWeight: FontWeight.normal,
-                  fontSize: 16,
-                ),
               ),
+              // ListTile(
+              //   leading:
+              //       SizedBox(width: 65, height: 65, child: getImageHeader()),
+              //   title: Row(
+              //     mainAxisAlignment: MainAxisAlignment.start,
+              //     children: [
+              //       AppText(
+              //         text: "Vong Quoc Phi",
+              //         fontSize: 18,
+              //         fontWeight: FontWeight.bold,
+              //       ),
+              //       SizedBox(
+              //         width: 5,
+              //       ),
+              //       GestureDetector(
+              //         onTap: () {},
+              //         child: Icon(
+              //           CupertinoIcons.pen,
+              //           color: Color(0xff53B175),
+              //           size: 20,
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              //   subtitle: AppText(
+              //     text: "phivq2002@gmail.com",
+              //     color: Color(0xff7C7C7C),
+              //     fontWeight: FontWeight.normal,
+              //     fontSize: 16,
+              //   ),
+              // ),
               Column(
                 children: getChildrenWithSeperator(
                   widgets: accountItems.map((e) {

@@ -30,7 +30,7 @@ class CartScreen extends StatelessWidget {
                   widgets: demoItems.map((e) {
                     return Container(
                       padding: EdgeInsets.symmetric(
-                        horizontal: 25,
+                        horizontal: 10,
                       ),
                       width: double.maxFinite,
                       child: ChartItemWidget(
@@ -40,7 +40,7 @@ class CartScreen extends StatelessWidget {
                   }).toList(),
                   seperator: Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 25,
+                      horizontal: 10,
                     ),
                     child: Divider(
                       thickness: 1,
@@ -61,7 +61,7 @@ class CartScreen extends StatelessWidget {
 
   Widget getCheckoutButton(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: AppButton(
         label: "Go To Check Out",
         fontWeight: FontWeight.w600,
