@@ -2,13 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:grocery_app/common_widgets/app_text.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:grocery_app/common_widgets/customize_button.dart';
 import 'package:grocery_app/helpers/column_with_seprator.dart';
 import 'package:grocery_app/screens/login_screen.dart';
 import 'package:grocery_app/styles/colors.dart';
 import 'package:page_transition/page_transition.dart';
 
+import '../../common_widgets/app_text.dart';
 import 'account_item.dart';
 
 class AccountScreen extends StatelessWidget {
@@ -70,37 +71,91 @@ class AccountScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              // ListTile(
-              //   leading:
-              //       SizedBox(width: 65, height: 65, child: getImageHeader()),
-              //   title: Row(
-              //     mainAxisAlignment: MainAxisAlignment.start,
-              //     children: [
-              //       AppText(
-              //         text: "Vong Quoc Phi",
-              //         fontSize: 18,
-              //         fontWeight: FontWeight.bold,
-              //       ),
-              //       SizedBox(
-              //         width: 5,
-              //       ),
-              //       GestureDetector(
-              //         onTap: () {},
-              //         child: Icon(
-              //           CupertinoIcons.pen,
-              //           color: Color(0xff53B175),
-              //           size: 20,
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              //   subtitle: AppText(
-              //     text: "phivq2002@gmail.com",
-              //     color: Color(0xff7C7C7C),
-              //     fontWeight: FontWeight.normal,
-              //     fontSize: 16,
-              //   ),
-              // ),
+              Container(
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: SizedBox(
+                          width: 65, height: 65, child: getImageHeader()),
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          AppText(
+                            text: "Vong Quoc Phi",
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Icon(
+                              CupertinoIcons.pen,
+                              color: Color(0xff53B175),
+                              size: 20,
+                            ),
+                          ),
+                        ],
+                      ),
+                      subtitle: AppText(
+                        text: "phivq2002@gmail.com",
+                        color: Color(0xff7C7C7C),
+                        fontWeight: FontWeight.normal,
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(left: 30),
+                          child: Row(
+                            children: [
+                              Icon(
+                                FontAwesomeIcons.rankingStar,
+                                color: Colors.black,
+                                size: 15,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              AppText(
+                                text: "Sắt",
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left: 90),
+                          child: Row(
+                            children: [
+                              Icon(
+                                FontAwesomeIcons.wallet,
+                                color: Colors.black,
+                                size: 15,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              AppText(
+                                text: "3000 points",
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
               Column(
                 children: getChildrenWithSeperator(
                   widgets: accountItems.map((e) {

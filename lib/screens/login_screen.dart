@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:grocery_app/common_widgets/app_button.dart';
 
 import '../common_widgets/app_text.dart';
 import '../styles/colors.dart';
