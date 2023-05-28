@@ -1,67 +1,59 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/styles/colors.dart';
+import 'package:partner_mobile/styles/app_colors.dart';
 
-class AppButton extends StatelessWidget {
-  final String label;
+class ButtonWidget extends StatelessWidget {
+  final String text;
   final double roundness;
+  final double thickness;
   final FontWeight fontWeight;
   final EdgeInsets padding;
-  final Widget? trailingWidget;
-  final Function? onPressed;
+  final Function? onTap;
+  final Color borderColor;
+  final Color? textColor;
+  final double fontSize;
+  final double left;
+  final double right;
+  final double top;
+  final double bottom;
 
-  const AppButton({
-    Key? key,
-    required this.label,
-    this.roundness = 18,
-    this.fontWeight = FontWeight.bold,
-    this.padding = const EdgeInsets.symmetric(vertical: 24),
-    this.trailingWidget,
-    this.onPressed,
-  }) : super(key: key);
+  const ButtonWidget({
+    super.key,
+    required this.text,
+    required this.roundness,
+    required this.fontWeight,
+    required this.padding,
+    required this.fontSize,
+    required this.thickness,
+    this.onTap,
+    this.borderColor = AppColors.primaryColor,
+    this.textColor,
+    this.left = 20,
+    this.right = 20,
+    this.top = 5,
+    this.bottom = 5,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.maxFinite,
-      child: ElevatedButton(
-        onPressed: () {
-          onPressed?.call();
-        },
-        style: ElevatedButton.styleFrom(
-          visualDensity: VisualDensity.compact,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(roundness),
-          ),
-          elevation: 0,
-          backgroundColor: AppColors.primaryColor,
-          textStyle: TextStyle(
-            color: Colors.white,
-            fontFamily: Theme.of(context).textTheme.bodyLarge?.fontFamily,
+      padding:
+          EdgeInsets.only(left: left, right: right, top: top, bottom: bottom),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: borderColor,
+          width: thickness,
+        ),
+        borderRadius: BorderRadius.circular(roundness),
+      ),
+      child: GestureDetector(
+        onTap: onTap as void Function()?,
+        child: Text(
+          text,
+          style: TextStyle(
+            color: textColor == null ? Colors.black : textColor!,
+            fontSize: fontSize,
             fontWeight: fontWeight,
           ),
-          padding: padding,
-          minimumSize: const Size.fromHeight(50),
-        ),
-        child: Stack(
-          fit: StackFit.passthrough,
-          children: <Widget>[
-            Center(
-              child: Text(
-                label,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: fontWeight,
-                ),
-              ),
-            ),
-            if (trailingWidget != null)
-              Positioned(
-                top: 0,
-                right: 25,
-                child: trailingWidget!,
-              ),
-          ],
         ),
       ),
     );

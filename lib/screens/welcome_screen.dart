@@ -1,32 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/common_widgets/app_button.dart';
-import 'package:grocery_app/common_widgets/app_text.dart';
-import 'package:grocery_app/screens/dashboard/dashboard_screen.dart';
-import 'package:grocery_app/styles/colors.dart';
 import 'package:page_transition/page_transition.dart';
 
-class WelcomeScreen extends StatelessWidget {
+import '../styles/app_colors.dart';
+import 'dashboard/dashboard_screen.dart';
+
+class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({super.key});
+
+  @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               icon(),
               welcomeTextWidget(),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               sloganText(),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               getButton(context),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               )
             ],
@@ -47,31 +53,36 @@ class WelcomeScreen extends StatelessWidget {
   }
 
   Widget welcomeTextWidget() {
-    return Column(
+    return const Column(
       children: [
-        AppText(
-          text: "Welcome",
-          fontSize: 30,
-          fontWeight: FontWeight.w600,
-          color: Colors.white,
+        Text(
+          "Welcome to",
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
         ),
-        AppText(
-          text: "to our store",
-          fontSize: 30,
-          fontWeight: FontWeight.w600,
-          color: Colors.white,
+        Text(
+          "Gadget Zone",
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
         ),
       ],
     );
   }
 
   Widget sloganText() {
-    return AppText(
-      text: "Get your favorite gear to improve your productivity",
-      textAlign: TextAlign.center,
-      fontSize: 16,
-      fontWeight: FontWeight.w600,
-      color: Color(0xffFCFCFC).withOpacity(0.7),
+    return const Text(
+      "The best place to buy gadgets",
+      style: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
+        color: Colors.white,
+      ),
     );
   }
 
@@ -84,13 +95,18 @@ class WelcomeScreen extends StatelessWidget {
           width: 2,
         ),
       ),
-      child: AppButton(
-        label: "Get Started",
-        fontWeight: FontWeight.w600,
-        padding: EdgeInsets.symmetric(vertical: 25),
+      child: MaterialButton(
         onPressed: () {
           onGetStartedClicked(context);
         },
+        child: const Text(
+          "Get Started",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }
@@ -99,9 +115,9 @@ class WelcomeScreen extends StatelessWidget {
     Navigator.push(
       context,
       PageTransition(
-        child: DashboardScreen(),
+        child: const DashBoardScreen(),
         type: PageTransitionType.fade,
-        duration: Duration(milliseconds: 1000),
+        duration: const Duration(milliseconds: 1000),
       ),
     );
   }

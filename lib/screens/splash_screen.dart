@@ -1,11 +1,13 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:grocery_app/screens/welcome_screen.dart';
-import 'package:grocery_app/styles/colors.dart';
+import 'package:partner_mobile/screens/welcome_screen.dart';
+
+import '../styles/app_colors.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
@@ -13,14 +15,14 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    const delay = const Duration(seconds: 3);
+    const delay = Duration(seconds: 3);
     Future.delayed(delay, () => onTimerFinished());
   }
 
   void onTimerFinished() {
-    Navigator.of(context).pushReplacement(new MaterialPageRoute(
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (BuildContext context) {
-        return WelcomeScreen();
+        return const WelcomeScreen();
       },
     ));
   }
@@ -49,7 +51,7 @@ Widget splashScreenIcon() {
           height: 400,
           fit: BoxFit.cover,
         ),
-        Center(
+        const Center(
           child: Text(
             "GADGET ZONE",
             style: TextStyle(

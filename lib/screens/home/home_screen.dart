@@ -1,84 +1,87 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/models/grocery_item.dart';
-import 'package:grocery_app/screens/product_details/product_details_screen.dart';
-import 'package:grocery_app/styles/colors.dart';
-import 'package:grocery_app/widgets/grocery_item_card_widget.dart';
-import 'package:grocery_app/widgets/search_bar_widget.dart';
+import 'package:partner_mobile/models/product_item.dart';
+import 'package:partner_mobile/models/title_enum.dart';
+import 'package:partner_mobile/screens/home/home_banner.dart';
+import 'package:partner_mobile/screens/widgets/feature_card_widget.dart';
+import 'package:partner_mobile/screens/widgets/item_card_widget.dart';
+import 'package:partner_mobile/screens/widgets/search_bar_widget.dart';
+import 'package:partner_mobile/styles/app_colors.dart';
 
-import '../../models/title_enum.dart';
-import 'grocery_featured_Item_widget.dart';
-import 'home_banner_widget.dart';
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
-class HomeScreen extends StatelessWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
-          child: SingleChildScrollView(
-            child: Center(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 15,
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 15,
+                ),
+                padded(const SearchBarWidget()),
+                const SizedBox(
+                  height: 25,
+                ),
+                const HomeBanner(),
+                const SizedBox(
+                  height: 25,
+                ),
+                padded(subTitle("Exclusive Order", TitleEnum.exclusiveOrder)),
+                getHorizontalItemSlider(exclusiveOffers),
+                const SizedBox(
+                  height: 15,
+                ),
+                padded(subTitle("Best Selling", TitleEnum.bestSelling)),
+                getHorizontalItemSlider(bestSelling),
+                const SizedBox(
+                  height: 15,
+                ),
+                padded(subTitle("Others", TitleEnum.others)),
+                const SizedBox(
+                  height: 15,
+                ),
+                SizedBox(
+                  height: 105,
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      FeaturedCard(
+                        featuredItems[0],
+                        color: const Color(0xffF8A44C),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      FeaturedCard(
+                        featuredItems[1],
+                        color: AppColors.primaryColor,
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                    ],
                   ),
-                  padded(SearchBarWidget()),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  HomeBanner(),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  padded(subTitle("Exclusive Order", TitleEnum.ExclusiveOrder)),
-                  getHorizontalItemSlider(exclusiveOffers),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  padded(subTitle("Best Selling", TitleEnum.BestSelling)),
-                  getHorizontalItemSlider(bestSelling),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  padded(subTitle("Groceries", TitleEnum.Groceries)),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    height: 105,
-                    child: ListView(
-                      padding: EdgeInsets.zero,
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        SizedBox(
-                          width: 20,
-                        ),
-                        GroceryFeaturedCard(
-                          groceryFeaturedItems[0],
-                          color: Color(0xffF8A44C),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        GroceryFeaturedCard(
-                          groceryFeaturedItems[1],
-                          color: AppColors.primaryColor,
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  getHorizontalItemSlider(groceries),
-                  SizedBox(
-                    height: 15,
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                getHorizontalItemSlider(others),
+                const SizedBox(
+                  height: 15,
+                ),
+              ],
             ),
           ),
         ),
@@ -88,48 +91,8 @@ class HomeScreen extends StatelessWidget {
 
   Widget padded(Widget widget) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       child: widget,
-    );
-  }
-
-  Widget getHorizontalItemSlider(List<GroceryItem> items) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      height: 250,
-      child: ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        itemCount: items.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              onItemClicked(context, items[index]);
-            },
-            child: GroceryItemCardWidget(
-              item: items[index],
-              heroSuffix: "home_screen",
-            ),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return SizedBox(
-            width: 20,
-          );
-        },
-      ),
-    );
-  }
-
-  void onItemClicked(BuildContext context, GroceryItem groceryItem) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ProductDetailsScreen(
-          groceryItem,
-          heroSuffix: "home_screen",
-        ),
-      ),
     );
   }
 
@@ -138,19 +101,20 @@ class HomeScreen extends StatelessWidget {
       children: [
         Text(
           text,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
-        Spacer(),
+        const Spacer(),
         GestureDetector(
           onTap: () {
-            if (titleEnum == TitleEnum.ExclusiveOrder)
+            if (titleEnum == TitleEnum.exclusiveOrder) {
               print("See All Exclusive Order");
-            else if (titleEnum == TitleEnum.BestSelling)
+            } else if (titleEnum == TitleEnum.bestSelling) {
               print("See All $titleEnum");
-            else if (titleEnum == TitleEnum.Groceries)
+            } else if (titleEnum == TitleEnum.others) {
               print("See All $titleEnum");
+            }
           },
-          child: Text(
+          child: const Text(
             "See All",
             style: TextStyle(
               fontSize: 18,
@@ -160,6 +124,32 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget getHorizontalItemSlider(List<ProductItem> items) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      height: 250,
+      child: ListView.separated(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        itemCount: items.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {},
+            child: ItemCardWidget(
+              item: items[index],
+              heroSuffix: "home_screen",
+            ),
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return const SizedBox(
+            width: 20,
+          );
+        },
+      ),
     );
   }
 }
